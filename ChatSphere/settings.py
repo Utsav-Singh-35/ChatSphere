@@ -31,11 +31,14 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'default-secret-key')
 DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS', '').split(',')
-
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'chatsphere-yhyv.onrender.com'] + ALLOWED_HOSTS
 # Ensure no empty strings in ALLOWED_HOSTS
 ALLOWED_HOSTS = [host.strip() for host in ALLOWED_HOSTS if host.strip()]
 
+
+
 # Debugging: Print ALLOWED_HOSTS to verify
+print("DEBUG:", DEBUG)
 print("ALLOWED_HOSTS:", ALLOWED_HOSTS)
 
 # Application definition
