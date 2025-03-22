@@ -1,0 +1,43 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<body class="signup-page">
+    <div class="login-container">
+        <div class="login-box">
+            <h1>Sign Up</h1>
+            
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            
+            <form method="post" action="{% url 'signup' %}">
+                {% csrf_token %}
+                <div class="input-group">
+                    <input type="text" name="username" id="username" required title="Choose a username" aria-label="Username">
+                    <label for="username">Username</label>
+                </div>
+                <div class="input-group">
+                    <input type="email" name="email" id="email" required title="Enter your email" aria-label="Email">
+                    <label for="email">Email</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password1" id="password1" required title="Create a password" aria-label="Password">
+                    <label for="password1">Password</label>
+                </div>
+                <div class="input-group">
+                    <input type="password" name="password2" id="password2" required title="Confirm your password" aria-label="Confirm Password">
+                    <label for="password2">Confirm Password</label>
+                </div>
+                <button type="submit">Sign Up</button>
+            </form>
+            <p style="margin-top: 20px; color: #fff;">Already have an account? <a href="{% url 'login' %}" style="color: #5e72e4;">Login</a></p>
+        </div>
+    </div>
+</body>
+{% endblock content %} 

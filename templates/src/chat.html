@@ -1,0 +1,126 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="chat-page">
+    <div class="chat-container">
+
+
+        <div class="chat-sidebar">
+            <div class="user-profile">
+                <img src="{% static 'images/default-avatar.svg' %}" alt="Profile" class="profile-img"
+                    href="profile.html">
+                <h3 class="user-name">{{ current_user.username }}</h3>
+
+                <div class="profile-actions">
+                    <a href="#" class="active"><i class="fas fa-comment"></i> Chats</a>
+                    <a href="#"><i class="fas fa-address-book"></i> Contacts</a>
+                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="#" class="feedback-btn" id="feedback-btn">
+                        <i class="fas fa-comment-dots"></i> Feedback
+                    </a>
+                    <a href="{% url 'logout' %}" class="sidebar-logout-btn">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-list">
+            <h1>Chats</h1>
+            <div class="search-box">
+                <input type="text" placeholder="Search contacts..." id="search-contacts">
+                <i class="fas fa-search"></i>
+            </div>
+
+            {% if users %}
+            {% for user in users %}
+            <div class="contacts-list">
+                <div class="contact-item" data-user-id="{{ user.id }}">
+                    <img src="{% static 'images/default-avatar.svg' %}" alt="{{ user.username }}"
+                        class="contact-avatar">
+                    <div class="contact-info">
+                        <h4>{{ user.username }}</h4>
+                        <p class="last-message">Click to start chatting</p>
+                    </div>
+                    <span class="message-time"></span>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <div class="no-contacts">
+                <p>No other users registered yet.</p>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="chat-main">
+            <div class="chat-header">
+                <div class="chat-contact-info">
+                    <img src="{% static 'images/default-avatar.svg' %}" alt="Contact" class="contact-img">
+                    <h3 class="contact-name">Select a contact</h3>
+                </div>
+            </div>
+
+            <div class="chat-messages">
+                <!-- Messages will appear here -->
+                <div class="welcome-message">
+                    <p>Select a contact to start chatting</p>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-button">Send</button>
+            </div>
+        </div>
+
+        <!-- Feedback Modal -->
+        <div id="feedback-modal" class="modal">
+            <div class="modal-content">
+                <span class="close-btn">&times;</span>
+                <h2>Send Feedback</h2>
+                <form id="feedback-form">
+                    <div class="input-group">
+                        <textarea id="feedback-text" required></textarea>
+                        <label for="feedback-text">Your feedback</label>
+                    </div>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="{% static 'js/chat.js' %}"></script>
+    <script>
+        // Feedback modal functionality
+        const feedbackBtn = document.getElementById('feedback-btn');
+        const feedbackModal = document.getElementById('feedback-modal');
+        const closeBtn = document.querySelector('.close-btn');
+
+        feedbackBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            feedbackModal.style.display = 'block';
+        });
+
+        closeBtn.addEventListener('click', function () {
+            feedbackModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function (e) {
+            if (e.target == feedbackModal) {
+                feedbackModal.style.display = 'none';
+            }
+        });
+
+        document.getElementById('feedback-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for your feedback!');
+            feedbackModal.style.display = 'none';
+            document.getElementById('feedback-text').value = '';
+        });
+    </script>
+</body>
+{% endblock content %}

@@ -1,0 +1,30 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<body class="profile-page">
+    <div class="profile-container">
+        <!-- Header -->
+        <header class="profile-header">
+            <h1>Profile</h1>
+            <hr>
+        </header>
+        
+        <!-- Profile Section -->
+        <section class="profile-content">
+            <div class="profile-picture">
+                <img src="default-avatar.svg" alt="Profile Picture">
+            </div>
+            <div class="user-details">
+                <p><strong>Username:</strong> UTSAV SINGH</p>
+                <p><strong>Email:</strong> UVS@gmail.com</p>
+            </div>
+        </section>
+        
+        <!-- Navigation Button -->
+        <div class="profile-navigation">
+            <a href="chat.html" class="btn">Back to Chat</a>
+            <a href="#" class="btn">Edit</a>
+        </div>
+    </div>
+</body>
+{% endblock content %} 
