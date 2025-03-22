@@ -133,3 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Login URL for the login_required decorator
 LOGIN_URL = 'login'
+
+CSRF_TRUSTED_ORIGINS = [
+    'https://chatsphere-yhyv.onrender.com'
+]
