@@ -6,19 +6,21 @@
 <body class="chat-page">
     <div class="chat-container">
 
+        {% include 'src/chat-sidebar.html' %}
 
-        <div class="chat-sidebar">
+        <!-- <div class="chat-sidebar">
             <div class="user-profile">
-                <img src="{% static 'images/default-avatar.svg' %}" alt="Profile" class="profile-img"
-                    href="profile.html">
-                <h3 class="user-name">{{ current_user.username }}</h3>
+                <a href="{% url 'profile' %}">
+                    <img src="{% static 'images/default-avatar.svg' %}" alt="Profile" class="profile-img">
+                    <h3 class="user-name">{{ current_user.username }}</h3>
+                </a>
 
                 <div class="profile-actions">
+                    <a href="{% url 'profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
                     <a href="#" class="active"><i class="fas fa-comment"></i> Chats</a>
-                    <a href="#"><i class="fas fa-address-book"></i> Contacts</a>
-                    <a href="#"><i class="fas fa-cog"></i> Settings</a>
-                    <a href="#"><i class="fas fa-question-circle"></i> Help</a>
-                    <a href="#"><i class="fas fa-info-circle"></i> About</a>
+                    <a href="{% url 'temporary' %}"><i class="fas fa-cog"></i> Settings</a>
+                    <a href="{% url 'temporary' %}"><i class="fas fa-question-circle"></i> Help</a>
+                    <a href="{% url 'temporary' %}"><i class="fas fa-info-circle"></i> About</a>
                     <a href="#" class="feedback-btn" id="feedback-btn">
                         <i class="fas fa-comment-dots"></i> Feedback
                     </a>
@@ -27,7 +29,7 @@
                     </a>
                 </div>
             </div>
-        </div>
+        </div> -->
 
         <div class="chat-list">
             <h1>Chats</h1>
@@ -67,9 +69,6 @@
 
             <div class="chat-messages">
                 <!-- Messages will appear here -->
-                <div class="welcome-message">
-                    <p>Select a contact to start chatting</p>
-                </div>
             </div>
 
             <div class="chat-input-area">
@@ -79,7 +78,7 @@
         </div>
 
         <!-- Feedback Modal -->
-        <div id="feedback-modal" class="modal">
+        <!-- <div id="feedback-modal" class="modal">
             <div class="modal-content">
                 <span class="close-btn">&times;</span>
                 <h2>Send Feedback</h2>
@@ -91,36 +90,9 @@
                     <button type="submit">Submit</button>
                 </form>
             </div>
-        </div>
+        </div> -->
+        
     </div>
     <script src="{% static 'js/chat.js' %}"></script>
-    <script>
-        // Feedback modal functionality
-        const feedbackBtn = document.getElementById('feedback-btn');
-        const feedbackModal = document.getElementById('feedback-modal');
-        const closeBtn = document.querySelector('.close-btn');
-
-        feedbackBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            feedbackModal.style.display = 'block';
-        });
-
-        closeBtn.addEventListener('click', function () {
-            feedbackModal.style.display = 'none';
-        });
-
-        window.addEventListener('click', function (e) {
-            if (e.target == feedbackModal) {
-                feedbackModal.style.display = 'none';
-            }
-        });
-
-        document.getElementById('feedback-form').addEventListener('submit', function (e) {
-            e.preventDefault();
-            alert('Thank you for your feedback!');
-            feedbackModal.style.display = 'none';
-            document.getElementById('feedback-text').value = '';
-        });
-    </script>
 </body>
 {% endblock content %}

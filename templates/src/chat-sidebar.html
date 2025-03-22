@@ -1,0 +1,42 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="chat-sidebar">
+    <div class="user-profile">
+        <a href="{% url 'profile' %}">
+            <img src="{% static 'images/default-avatar.svg' %}" alt="Profile" class="profile-img">
+            <h3 class="user-name">{{ current_user.username }}</h3>
+        </a>
+
+        <div class="profile-actions">
+            <a href="{% url 'profile' %}" {% if request.path == '/profile/' %}class="active"{% endif %}><i class="fa-solid fa-user"></i> Profile</a>
+            <a href="{% url 'chat' %}" {% if request.path == '/chat/' %}class="active"{% endif %}><i class="fas fa-comment"></i> Chats</a>
+            <!-- <a href="{% url 'temporary' %}"><i class="fas fa-address-book"></i> Contacts</a> -->
+            <a href="{% url 'settings' %}" {% if request.path == '/settings/' %}class="active"{% endif %}><i class="fas fa-cog"></i> Settings</a>
+            <a href="{% url 'help' %}" {% if request.path == '/help/' %}class="active"{% endif %}><i class="fas fa-question-circle"></i> Help</a>
+            <a href="{% url 'about' %}" {% if request.path == '/about/' %}class="active"{% endif %}><i class="fas fa-info-circle"></i> About</a>
+            <a href="{% url 'feedback' %}" {% if request.path == '/feedback/' %}class="active"{% endif %}><i class="fas fa-comment-dots"></i> Feedback</a>
+            <a href="{% url 'logout' %}" class="sidebar-logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+        <!-- Mobile menu toggle button will be added by JavaScript -->
+    </div>
+</div>
+
+<!-- Feedback Modal -->
+<!-- <div id="feedback-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <h2>Send Feedback</h2>
+        <form id="feedback-form">
+            <div class="input-group">
+                <textarea id="feedback-text" required></textarea>
+                <label for="feedback-text">Your feedback</label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+</div> -->
+
+{% endblock %}  

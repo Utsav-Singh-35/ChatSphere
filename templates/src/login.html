@@ -19,7 +19,7 @@
             <form method="post" action="{% url 'login' %}">
                 {% csrf_token %}
                 <div class="input-group">
-                    <input type="text" name="username" id="username" required title="Enter your username" aria-label="Username">
+                    <input type="text" name="username" id="username"  required title="Enter your username" aria-label="Username">
                     <label for="username">Username</label>
                 </div>
                 <div class="input-group">
@@ -28,7 +28,7 @@
                 </div>
                 <button type="submit">Login</button>
             </form>
-            <p style="margin-top: 20px; color: #fff;">Don't have an account? <a href="{% url 'signup' %}" style="color: #5e72e4;">Sign Up</a></p>
+            <p class="signup-link">Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></p>
         </div>
     </div>
 </body>

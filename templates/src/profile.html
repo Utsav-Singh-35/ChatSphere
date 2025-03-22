@@ -1,29 +1,37 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block content %}
 <body class="profile-page">
     <div class="profile-container">
-        <!-- Header -->
-        <header class="profile-header">
-            <h1>Profile</h1>
-            <hr>
-        </header>
-        
-        <!-- Profile Section -->
-        <section class="profile-content">
-            <div class="profile-picture">
-                <img src="default-avatar.svg" alt="Profile Picture">
+        <div class="profile-layout">
+            {% include 'src/chat-sidebar.html' %}
+            
+            <div class="profile-main-content">
+                <!-- Header -->
+                <header class="profile-header">
+                    <h1>My Profile</h1>
+                    <hr>
+                </header>
+                
+                <!-- Profile Section -->
+                <section class="profile-content">
+                    <div class="profile-picture">
+                        <img src="{% static 'images/default-avatar.svg' %}" alt="Profile Picture">
+                    </div>
+                    <div class="user-details">
+                        <p><i class="fas fa-user"></i> <strong>Username:</strong> {{ user.username }}</p>
+                        <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ user.email }}</p>
+                        <p><i class="fas fa-calendar-alt"></i> <strong>Joined:</strong> {{ user.date_joined|date:"F d, Y" }}</p>
+                        <p><i class="fas fa-clock"></i> <strong>Last Login:</strong> {{ user.last_login|date:"F d, Y" }}</p>
+                    </div>
+                </section>
+                
+                <!-- Navigation Button -->
+                <div class="profile-navigation">
+                    <a href="{% url 'chat' %}" class="btn"><i class="fas fa-comments"></i> Back to Chat</a>
+                    <a href="#" class="btn secondary"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                </div>
             </div>
-            <div class="user-details">
-                <p><strong>Username:</strong> UTSAV SINGH</p>
-                <p><strong>Email:</strong> UVS@gmail.com</p>
-            </div>
-        </section>
-        
-        <!-- Navigation Button -->
-        <div class="profile-navigation">
-            <a href="chat.html" class="btn">Back to Chat</a>
-            <a href="#" class="btn">Edit</a>
         </div>
     </div>
 </body>

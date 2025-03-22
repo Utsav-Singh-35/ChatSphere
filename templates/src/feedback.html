@@ -1,0 +1,19 @@
+{% extends 'index.html' %}
+{% load static %}
+
+{% block content %}
+
+<body class="feedback-page">
+    <div class="profile-container">
+        <div class="profile-layout">
+            {% include 'src/chat-sidebar.html' %}
+
+            <div class="profile-main-content">
+                {% include '../temporary.html' %}
+            </div>
+        </div>
+    </div>
+
+
+</body>
+{% endblock %}

@@ -66,7 +66,38 @@ def chat(request):
     current_user = request.user
     context = {
         'users': users,
-        'current_user': current_user
+        'current_user': current_user,
+        'request': request
     }
     return render(request, 'src/chat.html', context)
+
+@login_required
+def profile(request):
+    current_user = request.user
+    context = {
+        'current_user': current_user,
+        'request': request
+    }
+    return render(request, 'src/profile.html', context)
+
+def temporary(request):
+    return render(request, 'temporary.html')
+
+def settings(request):
+    return render(request, 'src/settings.html')
+
+def help(request):
+    return render(request, 'src/help.html')
+
+def about(request):
+    return render(request, 'src/about.html')
+
+def feedback(request):
+    current_user = request.user
+    context = {
+        'current_user': current_user,
+        'request': request
+    }
+    return render(request, 'src/feedback.html', context)
+
 
