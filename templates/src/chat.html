@@ -39,19 +39,18 @@
             </div>
 
             {% if users %}
-            {% for user in users %}
             <div class="contacts-list">
+                {% for user in users %}
                 <div class="contact-item" data-user-id="{{ user.id }}">
-                    <img src="{% static 'images/default-avatar.svg' %}" alt="{{ user.username }}"
-                        class="contact-avatar">
+                    <img src="{% static 'images/default-avatar.svg' %}" alt="{{ user.username }}" class="contact-avatar">
                     <div class="contact-info">
                         <h4>{{ user.username }}</h4>
                         <p class="last-message">Click to start chatting</p>
                     </div>
                     <span class="message-time"></span>
                 </div>
+                {% endfor %}
             </div>
-            {% endfor %}
             {% else %}
             <div class="no-contacts">
                 <p>No other users registered yet.</p>
@@ -63,7 +62,7 @@
             <div class="chat-header">
                 <div class="chat-contact-info">
                     <img src="{% static 'images/default-avatar.svg' %}" alt="Contact" class="contact-img">
-                    <h3 class="contact-name">Select a contact</h3>
+                    <h3 class="contact-name">{{ current_user.username }}</h3>
                 </div>
             </div>
 
@@ -77,21 +76,6 @@
             </div>
         </div>
 
-        <!-- Feedback Modal -->
-        <!-- <div id="feedback-modal" class="modal">
-            <div class="modal-content">
-                <span class="close-btn">&times;</span>
-                <h2>Send Feedback</h2>
-                <form id="feedback-form">
-                    <div class="input-group">
-                        <textarea id="feedback-text" required></textarea>
-                        <label for="feedback-text">Your feedback</label>
-                    </div>
-                    <button type="submit">Submit</button>
-                </form>
-            </div>
-        </div> -->
-        
     </div>
     <script src="{% static 'js/chat.js' %}"></script>
 </body>

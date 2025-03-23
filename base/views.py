@@ -80,6 +80,27 @@ def profile(request):
     }
     return render(request, 'src/profile.html', context)
 
+@login_required
+def update_profile(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        profile_picture = request.FILES.get('profile_picture')
+        
+        if username:
+            request.user.username = username
+        if email:
+            request.user.email = email
+        if profile_picture:
+            request.user.profile_picture = profile_picture  
+
+        request.user.save()
+        return redirect('profile')
+    
+    return render(request, 'src/update-profile.html')
+
+
+
 def temporary(request):
     return render(request, 'temporary.html')
 

@@ -9,11 +9,67 @@
             {% include 'src/chat-sidebar.html' %}
 
             <div class="profile-main-content">
-                {% include '../temporary.html' %}
+                <!-- Header -->
+                <header class="profile-header">
+                    <h1>SEND FEEDBACK</h1>
+                </header>
+                
+                <!-- Feedback Form -->
+                <div class="feedback-form-container">
+                    <form method="post" action="#" enctype="multipart/form-data" class="feedback-form">
+                        {% csrf_token %}
+                        
+                        <div class="form-group">
+                            <label for="feedback-subject">Subject</label>
+                            <input type="text" id="feedback-subject" name="subject" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="feedback-message">Your Feedback</label>
+                            <textarea id="feedback-message" name="message" rows="5" required></textarea>
+                        </div>
+                        
+                        <div class="form-group file-upload">
+                            <label for="feedback-attachment" class="file-label">
+                                <i class="fas fa-paperclip"></i> Attach Files (Optional)
+                            </label>
+                            <input type="file" id="feedback-attachment" name="attachment" class="file-input" multiple>
+                            <div class="file-info">Accepted formats: Images, PDFs, DOCs (Max 5MB)</div>
+                            <div class="selected-files" id="selected-files">No files selected</div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i> Submit Feedback
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Navigation Button -->
+                <div class="profile-navigation">
+                    <a href="{% url 'chat' %}" class="back-btn">
+                        <i class="fas fa-arrow-left"></i> Back to Chat
+                    </a>
+                </div>
             </div>
         </div>
     </div>
 
-
+    <script>
+        // Display selected file names
+        document.getElementById('feedback-attachment').addEventListener('change', function(e) {
+            const fileInput = e.target;
+            const fileInfo = document.getElementById('selected-files');
+            
+            if (fileInput.files.length > 0) {
+                let fileNames = '';
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    fileNames += `<div class="file-item"><i class="fas fa-file"></i> ${fileInput.files[i].name}</div>`;
+                }
+                fileInfo.innerHTML = fileNames;
+            } else {
+                fileInfo.textContent = 'No files selected';
+            }
+        });
+    </script>
 </body>
 {% endblock %}

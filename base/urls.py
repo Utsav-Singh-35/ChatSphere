@@ -8,6 +8,7 @@ urlpatterns = [
     path('chat/', views.chat, name='chat'),
     path('logout/', views.logout_view, name='logout'),
     path('profile/', views.profile, name='profile'),
+    path('update-profile/', views.update_profile, name='update-profile'),
     path('temporary/', views.temporary, name='temporary'),
     path('settings/', views.settings, name='settings'),
     path('help/', views.help, name='help'),

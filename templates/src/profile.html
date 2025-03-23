@@ -5,7 +5,7 @@
     <div class="profile-container">
         <div class="profile-layout">
             {% include 'src/chat-sidebar.html' %}
-            
+
             <div class="profile-main-content">
                 <!-- Header -->
                 <header class="profile-header">
@@ -16,7 +16,7 @@
                 <!-- Profile Section -->
                 <section class="profile-content">
                     <div class="profile-picture">
-                        <img src="{% static 'images/default-avatar.svg' %}" alt="Profile Picture">
+                        <img src="{{ user.profile_picture.url }}" alt="Profile Picture">
                     </div>
                     <div class="user-details">
                         <p><i class="fas fa-user"></i> <strong>Username:</strong> {{ user.username }}</p>
@@ -29,7 +29,7 @@
                 <!-- Navigation Button -->
                 <div class="profile-navigation">
                     <a href="{% url 'chat' %}" class="btn"><i class="fas fa-comments"></i> Back to Chat</a>
-                    <a href="#" class="btn secondary"><i class="fas fa-user-edit"></i> Edit Profile</a>
+                    <a href="{% url 'update-profile' %}" class="btn secondary"><i class="fas fa-user-edit"></i> Edit Profile</a>
                 </div>
             </div>
         </div>

@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
     const chatMessages = document.querySelector('.chat-messages');
+    const contactItems = document.querySelectorAll('.contact-item');
+    const chatMain = document.querySelector('.chat-main');
+    const chatList = document.querySelector('.chat-list');
+    const chatContainer = document.querySelector('.chat-container');
+    const contactName = document.querySelector('.contact-name');
+    
+    // Check if we're on mobile
+    const isMobile = () => window.innerWidth <= 768;
 
     // Function to add a new message
     function addMessage(message, isSent) {
@@ -43,8 +51,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add this to your existing JavaScript
     const searchInput = document.getElementById('search-contacts');
     if (searchInput) {
-        const contactItems = document.querySelectorAll('.contact-item');
-
         searchInput.addEventListener('input', (e) => {
             const searchTerm = e.target.value.toLowerCase();
             
@@ -58,6 +64,56 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
+    
+    // Mobile chat interaction
+    contactItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const username = item.querySelector('h4').textContent;
+            contactName.textContent = username;
+            
+            // Add message for demo
+            chatMessages.innerHTML = '';
+            
+            if (isMobile()) {
+                // Show chat interface on mobile
+                chatList.style.display = 'none';
+                chatMain.style.display = 'flex';
+                
+                // Add back button for mobile
+                if (!document.querySelector('.back-to-contacts')) {
+                    const backButton = document.createElement('button');
+                    backButton.className = 'back-to-contacts';
+                    backButton.innerHTML = '<i class="fas fa-arrow-left"></i>';
+                    document.querySelector('.chat-header').prepend(backButton);
+                    
+                    backButton.addEventListener('click', () => {
+                        chatList.style.display = 'block';
+                        chatMain.style.display = 'none';
+                    });
+                }
+            }
+            
+        });
+    });
+    
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (!isMobile()) {
+            // Reset layout on desktop
+            chatList.style.display = 'block';
+            chatMain.style.display = 'flex';
+            
+            // Remove mobile back button if exists
+            const backButton = document.querySelector('.back-to-contacts');
+            if (backButton) {
+                backButton.remove();
+            }
+        } else if (document.querySelector('.contact-name').textContent !== 'Select a contact') {
+            // On mobile, keep showing chat if a contact is selected
+            chatList.style.display = 'none';
+            chatMain.style.display = 'flex';
+        }
+    });
     
     // Mobile menu toggle functionality
     const userProfile = document.querySelector('.user-profile');
