@@ -9,6 +9,7 @@
             {% include 'src/chat-sidebar.html' %}
 
             <div class="profile-main-content">
+                
                 <!-- Header -->
                 <header class="profile-header">
                     <h1>SEND FEEDBACK</h1>
@@ -16,7 +17,8 @@
                 
                 <!-- Feedback Form -->
                 <div class="feedback-form-container">
-                    <form method="post" action="#" enctype="multipart/form-data" class="feedback-form">
+                    <form method="post" action="https://api.web3forms.com/submit" enctype="multipart/form-data" class="feedback-form">
+                        <input type="hidden" name="access_key" value="c65cb620-9d02-4744-b8fc-64093acdfbd2">
                         {% csrf_token %}
                         
                         <div class="form-group">
@@ -29,16 +31,16 @@
                             <textarea id="feedback-message" name="message" rows="5" required></textarea>
                         </div>
                         
-                        <div class="form-group file-upload">
+                        <!-- <div class="form-group file-upload">
                             <label for="feedback-attachment" class="file-label">
                                 <i class="fas fa-paperclip"></i> Attach Files (Optional)
                             </label>
                             <input type="file" id="feedback-attachment" name="attachment" class="file-input" multiple>
                             <div class="file-info">Accepted formats: Images, PDFs, DOCs (Max 5MB)</div>
                             <div class="selected-files" id="selected-files">No files selected</div>
-                        </div>
+                        </div> -->
                         
-                        <button type="submit" class="submit-btn">
+                        <button type="submit" class="submit-btn" onclick="this.innerHTML = 'Sending...'; handleSubmit(this)">
                             <i class="fas fa-paper-plane"></i> Submit Feedback
                         </button>
                     </form>
@@ -55,6 +57,13 @@
     </div>
 
     <script>
+
+function handleSubmit(button) {
+        button.innerHTML = 'Sending...';
+        setTimeout(() => {
+            window.location.href = "{% url 'chat' %}";
+        }, 500);
+    }
         // Display selected file names
         document.getElementById('feedback-attachment').addEventListener('change', function(e) {
             const fileInput = e.target;
